@@ -1,22 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { BiArchive } from 'react-icons/bi'
+import SearchFeild from './components/SearchFeild';
+import AddAppointment from './components/AddAppointment';
+import AppointmentInfo from './components/AppointmentInfo';
+import appDataList from './data.json';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App p-5">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1 className='text-3xl font-bold py-8 text-center'><BiArchive className='text-red-400 inline-block mx-1' />Your Appointment</h1>
+        <AddAppointment />
+        <SearchFeild />
+
+        <ul className='divide-y divide-gray-200 m-3'>
+          {appDataList.map(appointment => (
+            <AppointmentInfo key={appointment.id} appointment={appointment} />
+          ))}
+        </ul>
+
       </header>
     </div>
   );
