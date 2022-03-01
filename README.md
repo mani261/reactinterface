@@ -1,6 +1,6 @@
 # Getting Started with The Appointment App
 
-This is an excercise to review React fundumentals. It's developed based on a Linkedin's crash course.
+This is an exercise to review React fundumentals. It's developed based on a Linkedin's crash course.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), Tailwind, React Icons, .
 
 ## Available Scripts
