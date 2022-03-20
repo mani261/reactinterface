@@ -8,6 +8,7 @@ import AppointmentInfo from './components/AppointmentInfo';
 function App() {
 
   let [appointmentList, setAppointmentList] = useState([])
+  let [query, setQuery] = useState('')
 
   const fetchData = useCallback(() => {
     fetch('./data.json')
@@ -19,6 +20,14 @@ function App() {
     fetchData()
   }, [fetchData])
 
+  const filteredAppointment = appointmentList.filter(item => {
+    return (
+      item.petName.toLowerCase().includes(query.toLowerCase()) ||
+      item.ownerName.toLowerCase().includes(query.toLowerCase()) ||
+      item.aptNotes.toLowerCase().includes(query.toLowerCase())
+      )
+  })
+
   return (
     <div className="App p-5">
       <header className="App-header">
@@ -26,12 +35,12 @@ function App() {
         <h1 className='text-3xl font-bold py-8 text-center'><BiArchive className='text-red-400 inline-block mx-1' />Your Appointment</h1>
 
         <AddAppointment />
-        <SearchFeild />
+        <SearchFeild query={query} onQueryChange={myQuery => setQuery(myQuery)} />
 
       </header>
 
       <ul className='divide-y divide-gray-200 m-3'>
-        {appointmentList.map(appointment => (
+        {filteredAppointment.map(appointment => (
           <AppointmentInfo key={appointment.id}
             appointment={appointment}
             onDeleteAppointment={appointmentId => setAppointmentList(appointmentList.filter(appointment => appointment.id !== appointmentId))} />
