@@ -9,6 +9,8 @@ function App() {
 
   let [appointmentList, setAppointmentList] = useState([])
   let [query, setQuery] = useState('')
+  let [sortBy, setSortBy] = useState('petName')
+  let [orderBy, setOrderBy] = useState('asc')
 
   const fetchData = useCallback(() => {
     fetch('./data.json')
@@ -25,7 +27,13 @@ function App() {
       item.petName.toLowerCase().includes(query.toLowerCase()) ||
       item.ownerName.toLowerCase().includes(query.toLowerCase()) ||
       item.aptNotes.toLowerCase().includes(query.toLowerCase())
-      )
+    )
+  }).sort((a, b) => {
+    let order = (orderBy === 'asc') ? 1 : -1;
+    return (
+      a[sortBy].toLowerCase() < b[sortBy].toLowerCase()
+      ? -1 * order : 1 * order
+    )
   })
 
   return (
@@ -35,7 +43,11 @@ function App() {
         <h1 className='text-3xl font-bold py-8 text-center'><BiArchive className='text-red-400 inline-block mx-1' />Your Appointment</h1>
 
         <AddAppointment />
-        <SearchFeild query={query} onQueryChange={myQuery => setQuery(myQuery)} />
+        <SearchFeild query={query} 
+        onQueryChange={myQuery => setQuery(myQuery)}
+        onSortChange={mySort => setSortBy(mySort)}
+        onOrderChange={myOrder => setOrderBy(myOrder)}
+         />
 
       </header>
 
