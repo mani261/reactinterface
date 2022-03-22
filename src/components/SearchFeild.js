@@ -1,7 +1,7 @@
 import { BiSearch, BiCaretDown, BiCheck } from 'react-icons/bi'
 import { useState } from 'react'
 
-const DropDown = ({ toggle, sortBy, onSortChange, orderBy,  onOrderChange }) => {
+const DropDown = ({ toggle, sortBy, onSortChange, orderBy, onOrderChange }) => {
   if (!toggle) {
     return null
   }
@@ -11,7 +11,7 @@ const DropDown = ({ toggle, sortBy, onSortChange, orderBy,  onOrderChange }) => 
       <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
         <div onClick={() => onSortChange('petName')}
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-          role="menuitem">Pet Name {sortBy === 'petName' && <BiCheck />}</div>
+          role="menuitem">Pet Name {(sortBy === 'petName') && <BiCheck />}</div>
         <div onClick={() => onSortChange('ownerName')}
           className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
           role="menuitem">Owner Name  {(sortBy === 'ownerName') && <BiCheck />}</div>
@@ -30,7 +30,7 @@ const DropDown = ({ toggle, sortBy, onSortChange, orderBy,  onOrderChange }) => 
 }
 
 const SearchFeild = ({ query, onQueryChange, sortBy, onSortChange, orderBy, onOrderChange }) => {
-  let [toggleSort, setToggleSort] = useState(false)
+  let [toggleSort, setToggleSort] = useState(false);
   return (
     <div className="py-5 m-3">
       <div className="mt-1 relative rounded-md shadow-sm">
